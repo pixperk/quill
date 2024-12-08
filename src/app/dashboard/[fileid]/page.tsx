@@ -6,13 +6,11 @@ import { notFound, redirect } from 'next/navigation'
 
 
 interface pageProps {
-  params : {
-    fileid  : string
-  }
+  params :Promise<{ fileid: string }>
 }
 
 const page = async({params} : pageProps) => {
-    const {fileid} =  params
+    const {fileid} =  await params
 
     const {getUser} = getKindeServerSession()
     const user = await getUser()
