@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
-const Page = () => {
+const PageContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const origin = searchParams.get('origin');
@@ -35,5 +35,10 @@ const Page = () => {
     </div>
   );
 };
+
+
+const Page = () => {
+  return <Suspense><Page/></Suspense>
+}
 
 export default Page;
