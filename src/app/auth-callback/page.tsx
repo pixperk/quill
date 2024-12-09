@@ -48,7 +48,7 @@ const Page = () => {
       <div className="w-full mt-24 flex justify-center">
         <div className="flex flex-col items-center gap-2">
           <h3 className="font-semibold text-xl text-red-500">An error occurred!</h3>
-          <p className="text-gray-700">We couldn't set up your account. Please try again.</p>
+          <p className="text-gray-700">We couldn&apos;t set up your account. Please try again.</p>
           <button
             className="px-4 py-2 mt-4 bg-purple-500 text-white rounded-md hover:bg-purple-600"
             onClick={() => mutate()}
@@ -69,7 +69,7 @@ const Page = () => {
           Redirecting to your dashboard...
         </h3>
         <p className="text-gray-600">
-          Hang tight! We're preparing everything for you.
+          Hang tight! We&apos;re preparing everything for you.
         </p>
       </div>
     </div>
