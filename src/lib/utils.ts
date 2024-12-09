@@ -43,7 +43,6 @@ export function constructMetadata({
     },
     icons,
     metadataBase : new URL("https://quill-two-ochre.vercel.app"),
-    themeColor : "#FFF",
     ...(noIndex && {
       robots : {
         index  : false,

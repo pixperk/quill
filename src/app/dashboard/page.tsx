@@ -9,8 +9,9 @@ import { getUserSubscriptionPlan } from "@/lib/stripe";
 const page = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+ 
 
-  if (!user || !user.id) redirect("/api/auth/login?post_login_redirect_url=/dashboard");
+  if (!user || !user.id) redirect("/auth-callback?origin-dashboard");
 
   const dbUser = await db.user.findFirst({
     where: { id: user.id },
