@@ -9,7 +9,7 @@ import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
 
 export const appRouter = router({
-  authCallback: publicProcedure.query(async () => {
+  authCallback: publicProcedure.mutation(async () => {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 
