@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect } from 'react';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { notFound, redirect, useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
@@ -18,12 +18,12 @@ const PageContent = () => {
   useEffect(() => {
     if (data) {
       if (data.success) {
-        redirect(origin ? `/${origin}/` : '/dashboard/');
+        router.push(origin ? `/${origin}/` : '/dashboard/');
       } else {
-        redirect('/api/auth/login?post_login_redirect_url=/dashboard/');
+        return notFound()
       }
     }
-  }, [data, origin, router]);
+  }, [data]);
 
   return (
     <div className="w-full mt-24 flex justify-center">
