@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Suspense } from 'react';
-import { notFound, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
@@ -15,23 +16,15 @@ const PageContent = () => {
     retryDelay: 500,
   });
 
-
+  useEffect(() => {
     if (data) {
-        router.push(origin ? `/${origin}/` : '/dashboard/');
-      } else {
-        return notFound()
-      }
-    
-
-    if(error){
+      router.push(origin ? `/${origin}/` : '/dashboard/');
+    } else if (error) {
       if (error.data?.code === 'UNAUTHORIZED') {
-        router.push('/sign-in')
-      }
-      else{
-        return notFound()
+        router.push('/sign-in');
       }
     }
-
+  }, [data, error, router, origin]);
 
   return (
     <div className="w-full mt-24 flex justify-center">
@@ -44,9 +37,12 @@ const PageContent = () => {
   );
 };
 
-
 const Page = () => {
-  return <Suspense><PageContent/></Suspense>
-}
+  return (
+    <Suspense>
+      <PageContent />
+    </Suspense>
+  );
+};
 
 export default Page;
