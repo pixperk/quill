@@ -1,7 +1,7 @@
 'use client';
 
-import { Suspense, useEffect } from 'react';
-import { notFound, redirect, useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { notFound, useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
@@ -10,16 +10,24 @@ const PageContent = () => {
   const searchParams = useSearchParams();
   const origin = searchParams.get('origin');
 
-  const { data } = trpc.authCallback.useQuery(undefined, {
+  const { data, error } = trpc.authCallback.useQuery(undefined, {
     retry: true,
     retryDelay: 500,
   });
 
 
     if (data) {
-      if (data.success) {
         router.push(origin ? `/${origin}/` : '/dashboard/');
       } else {
+        return notFound()
+      }
+    
+
+    if(error){
+      if (error.data?.code === 'UNAUTHORIZED') {
+        router.push('/sign-in')
+      }
+      else{
         return notFound()
       }
     }

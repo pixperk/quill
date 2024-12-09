@@ -11,7 +11,7 @@ const page = async () => {
   const user = await getUser();
  
 
-  if (!user || !user.id) redirect("/auth-callback?origin=dashboard/");
+  if (!user || !user.id) redirect("/auth-callback?origin=dashboard");
 
   const dbUser = await db.user.findFirst({
     where: { id: user.id },
@@ -19,7 +19,7 @@ const page = async () => {
 
   const subscriptionPlan = await getUserSubscriptionPlan()
 
-  if(!dbUser) redirect("/auth-callback?origin=dashboard/");
+  if(!dbUser) redirect("/auth-callback?origin=dashboard");
 
   return <Dashboard subscriptionPlan={subscriptionPlan}/>
 
