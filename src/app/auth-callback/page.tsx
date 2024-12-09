@@ -38,7 +38,7 @@ const PageContent = () => {
 
 
 const Page = () => {
-  return <Suspense><Page/></Suspense>
+  return <Suspense><PageContent/></Suspense>
 }
 
 export default Page;
