@@ -60,6 +60,8 @@ const onUploadComplete = async ({
     const pageLevelDocs = await loader.load();
 
     const pagesAmt = pageLevelDocs.length;
+    console.log(pagesAmt);
+    
 
     const { subscriptionPlan } = metadata;
     const { isSubscribed } = subscriptionPlan;
@@ -69,6 +71,10 @@ const onUploadComplete = async ({
     const isFreeExceeded =
       pagesAmt > PLANS.find((plan) => plan.name === "Free")!.pagesPerPdf;
 
+      console.log("isFreeExceeded : ", isFreeExceeded);
+      
+      console.log("isSub" ,isSubscribed);
+      
     if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
       await db.file.update({
         data: {
@@ -78,6 +84,7 @@ const onUploadComplete = async ({
           id: createdFile.id,
         },
       });
+      return
     }
 
     // Initialize Pinecone index
@@ -91,14 +98,11 @@ const onUploadComplete = async ({
       model: "jina-embeddings-v2-base-en", // Optional, defaults to "jina-embeddings-v2-base-en"
     });
 
-    console.log(embeddings);
 
-    const store = await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
+    await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
       pineconeIndex,
       namespace: createdFile.id,
     });
-
-    console.log(store);
 
     await db.file.update({
       data: {
@@ -109,8 +113,7 @@ const onUploadComplete = async ({
       },
     });
   } catch (error) {
-    console.log(error);
-    alert(error);
+    
     await db.file.update({
       data: {
         uploadStatus: "FAILED",

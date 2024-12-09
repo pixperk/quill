@@ -4,12 +4,12 @@ import UploadButton from "@/components/UploadButton";
 import { format } from "date-fns";
 import {
   Check,
-  Cross,
   Ghost,
   Loader2,
   Loader2Icon,
   Plus,
-  Trash
+  Trash,
+  X
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -85,7 +85,7 @@ const Dashboard = ({subscriptionPlan} : PageProps) => {
 
                   <div className="flex items-center gap-2">
                     {file.uploadStatus === "FAILED" ? (
-                      <Cross className="text-red-500 h-4 w-4" />
+                      <X className="text-red-500 h-4 w-4" />
                     ) : file.uploadStatus === "SUCCESS" ? (
                       <Check className="text-green-500 h-4 w-4" />
                     ) : (

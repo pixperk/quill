@@ -15,7 +15,7 @@ const PageContent = () => {
     retryDelay: 500,
   });
 
-  useEffect(() => {
+
     if (data) {
       if (data.success) {
         router.push(origin ? `/${origin}/` : '/dashboard/');
@@ -23,7 +23,7 @@ const PageContent = () => {
         return notFound()
       }
     }
-  }, [data]);
+
 
   return (
     <div className="w-full mt-24 flex justify-center">

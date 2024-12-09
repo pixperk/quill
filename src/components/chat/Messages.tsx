@@ -5,6 +5,7 @@ import Message from "./Message";
 import { useContext, useEffect, useRef } from "react";
 import { ChatContext } from "./ChatContext";
 import { useIntersection } from "@mantine/hooks";
+import { MessageSquare } from "lucide-react";
 
 interface MessagesProps {
   fileId: string;
@@ -94,10 +95,13 @@ const Messages = ({ fileId }: MessagesProps) => {
           <Skeleton className="h-16" />
         </div>
       ) : (
-        <div className="flex-1 flex flex-col items-center justify-center gap-2">
-          <h3 className="font-semibold text-xl">You&apos;re all set</h3>
-          <p className="text-zinc-500 text-sm">
-            Ask quill something related to the PDF on left...
+        <div className='flex-1 flex flex-col items-center justify-center gap-2'>
+          <MessageSquare className='h-8 w-8 text-purple-500' />
+          <h3 className='font-semibold text-xl'>
+            You&apos;re all set!
+          </h3>
+          <p className='text-zinc-500 text-sm'>
+            Ask your first question to get started.
           </p>
         </div>
       )}
