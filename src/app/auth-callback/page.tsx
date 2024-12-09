@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 
@@ -18,9 +18,9 @@ const PageContent = () => {
   useEffect(() => {
     if (data) {
       if (data.success) {
-        router.push(origin ? `/${origin}/` : '/dashboard/');
+        redirect(origin ? `/${origin}/` : '/dashboard/');
       } else {
-        router.push('/api/auth/login?post_login_redirect_url=/dashboard/');
+        redirect('/api/auth/login?post_login_redirect_url=/dashboard/');
       }
     }
   }, [data, origin, router]);
