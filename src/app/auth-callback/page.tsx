@@ -23,9 +23,6 @@ const PageContent = () => {
         router.push('/api/auth/login?post_login_redirect_url=/dashboard/');
       }
     }
-    else{
-      router.push('/api/auth/login?post_login_redirect_url=/dashboard/');
-    }
   }, [data, origin, router]);
 
   return (
