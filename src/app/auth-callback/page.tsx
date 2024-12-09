@@ -3,9 +3,9 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
-const Page = () => {
+const PageContent = () => {
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -75,5 +75,11 @@ const Page = () => {
     </div>
   );
 };
+
+const Page = () => {
+  <Suspense>
+    <PageContent/>
+  </Suspense>
+}
 
 export default Page;
