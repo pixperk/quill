@@ -34,7 +34,7 @@ const DashboardPage = async () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-purple-50">
         <h1 className="text-3xl font-bold text-purple-800 mb-6">Account Setup Required</h1>
-        <p className="text-lg text-purple-600 mb-8">Your account isn't fully set up yet. Let's complete the process!</p>
+        <p className="text-lg text-purple-600 mb-8">Your account isn&apos;t fully set up yet. Let&apos;s complete the process!</p>
         <Link href="/auth-callback?origin=dashboard">
           <Button variant="outline" className="border-purple-600 text-purple-600 hover:bg-purple-100">
             Complete Setup
