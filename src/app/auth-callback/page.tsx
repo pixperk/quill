@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
 import { trpc } from '../_trpc/client';
 import { Loader2 } from 'lucide-react';
 import { Suspense } from 'react';
@@ -10,23 +10,17 @@ const PageContent = () => {
   const searchParams = useSearchParams();
   const origin = searchParams.get('origin');
 
-  const { data, error } = trpc.authCallback.useQuery(undefined, {
+  const { data } = trpc.authCallback.useQuery(undefined, {
     retry: true,
     retryDelay: 500,
   });
 
-  if (error) {
-    const errData = error.data;
-    if (errData?.code === 'UNAUTHORIZED') {
-      router.push('/sign-in');
-    } else {
-      console.error('An error occurred:', error);
-    }
-  }
-
   if (data?.success) {
     router.push(origin ? `/${origin}` : '/dashboard');
+  }else{
+    redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
+  
 
   return (
     <div className="w-full mt-24 flex justify-center">
