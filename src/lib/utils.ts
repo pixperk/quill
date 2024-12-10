@@ -6,13 +6,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function absoluteUrl(path: string) {
-  if (typeof window !== "undefined") return path;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}${path}`;
-  return `http://localhost:${process.env.PORT ?? 3000}${path}`;
-}
-
-
 export function constructMetadata({
   title = "Quill - the SaaS for research",
   description = "Quill is an open source software to make chatting to your pdfs easy and convenieint",
