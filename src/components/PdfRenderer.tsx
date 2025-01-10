@@ -33,12 +33,6 @@ import SimpleBar from "simplebar-react";
 
 import { useToast } from "@/hooks/use-toast";
 import PdfFullscreen from "./PdfFullScreen";
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/legacy/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
-
 interface PdfRendererProps {
   url: string;
 }
